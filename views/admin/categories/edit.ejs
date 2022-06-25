@@ -1,0 +1,16 @@
+<%- include("../../partials/head", { titulo: 'Edit Category' }) %>
+    
+    <%- include("../../partials/header") %>
+
+    <main class="container">
+        <div class="card-header">
+            <h1>Edição de categorias</h1>
+        </div>
+        <form class="card-body fcadastrar" action="/categories/update" method="post">
+            <input type="hidden" name="id" value="<%= category.id %>">
+            <input type="text" name="title" class="form-control" placeholder="<%= category.title %>" value="<%= category.title %>" required>
+            <button type="submit" class="btn btn-warning">Editar</button>
+        </form>
+    </main>
+
+<%- include("../../partials/footer") %>

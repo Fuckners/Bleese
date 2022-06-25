@@ -1,0 +1,49 @@
+<%- include("../../partials/head", { titulo: 'Users' }) %>
+    
+    <%- include("../../partials/header") %>
+
+    <main class="container">
+        <div class="cabecalho">
+            <h1>Usuários</h1>
+            <a class="btn btn-warning font-white" href="/admin/users/new"><h3>Novo usuário</h3></a>
+        </div>
+        <hr>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Level</th>
+                    <th>Nickname</th>
+                    <th>Email</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for (user of users) {%> 
+                    <tr>
+                        <td><%= user.id %></td>
+                        <td><%= user.level %></td>
+                        <td><%= user.nickname %></td>
+                        <td><%= user.email %></td>
+                        <td>
+                            <form id="deletar" action="/admin/users/del" method="post" class="inline" onsubmit="confirmaDel(event)">
+                                <button type="submit" name="id" value="<%= user.id %>" class="btn btn-danger">Excluir</button>
+                            </form>
+                        </td>
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
+    </main>
+    
+<%- include("../../partials/footer") %>
+
+<script>
+
+    function confirmaDel(event) {
+        if (prompt('Digite "deletar" para confirmar.') != 'deletar') {
+            event.preventDefault();
+        }
+    }
+
+</script>

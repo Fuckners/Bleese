@@ -1,0 +1,53 @@
+<%- include("../../partials/head", { titulo: 'Articles' }) %>
+    
+    <%- include("../../partials/header") %>
+
+    <main class="container">
+        <div class="cabecalho">
+            <h1>Artigos</h1>
+            <a class="btn btn-warning font-white" href="/admin/articles/new"><h3>Novo Artigo</h3></a>
+        </div>
+        <hr>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Título</th>
+                    <th>Slug</th>
+                    <th>Categoria</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for (article of articles) { %> 
+                    <tr>
+                        <td><%= article.id %></td>
+                        <td style="width: 350px;"><%= article.title %></td>
+                        <td style="width: 350px;"><%= article.slug %></td>
+                        <td><%= article.Category.title %></td>
+                        <td>
+                            <form action="/admin/articles/edit/<%= article.id %>" method="get" class="inline">
+                                <button type="submit" class="btn btn-warning">Editar</button>
+                            </form>
+
+                            <form id="deletar" action="/admin/articles/del" method="post" class="inline" onsubmit="confirmaDel(event)">
+                                <button type="submit" name="id" value="<%= article.id %>" class="btn btn-danger">Excluir</button>
+                            </form>
+                        </td>
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
+    </main>
+    
+<%- include("../../partials/footer") %>
+
+<script>
+
+    function confirmaDel(event) {
+        if (prompt('Digite "deletar" para confirmar.') != 'deletar') {
+            event.preventDefault();
+        }
+    }
+
+</script>

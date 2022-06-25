@@ -1,0 +1,15 @@
+<%- include("../../partials/head", { titulo: 'New Category' }) %>
+    
+    <%- include("../../partials/header") %>
+
+    <main class="container">
+        <div class="card-header">
+            <h1>Cadastro de categorias</h1>
+        </div>
+        <form class="card-body fcadastrar" action="/categories/save" method="post">
+            <input type="text" name="title" class="form-control" placeholder="Defina o título da categoria" required>
+            <button type="submit" class="btn btn-warning">Cadastrar</button>
+        </form>
+    </main>
+    
+<%- include("../../partials/footer") %>

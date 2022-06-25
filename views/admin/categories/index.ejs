@@ -1,0 +1,51 @@
+<%- include("../../partials/head", { titulo: 'Categories' }) %>
+    
+    <%- include("../../partials/header") %>
+
+    <main class="container">
+        <div class="cabecalho">
+            <h1>Categorias</h1>
+            <a class="btn btn-warning font-white" href="/admin/categories/new"><h3>Nova Categoria</h3></a>
+        </div>
+        <hr>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Título</th>
+                    <th>Slug</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for (category of categories) {%> 
+                    <tr>
+                        <td><%= category.id %></td>
+                        <td><%= category.title %></td>
+                        <td><%= category.slug %></td>
+                        <td>
+                            <form action="/admin/categories/edit/<%= category.id %>" method="get" class="inline">
+                                <button type="submit" class="btn btn-warning">Editar</button>
+                            </form>
+
+                            <form id="deletar" action="/admin/categories/del" method="post" class="inline" onsubmit="confirmaDel(event)">
+                                <button type="submit" name="id" value="<%= category.id %>" class="btn btn-danger">Excluir</button>
+                            </form>
+                        </td>
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
+    </main>
+    
+<%- include("../../partials/footer") %>
+
+<script>
+
+    function confirmaDel(event) {
+        if (prompt('Digite "deletar" para confirmar.') != 'deletar') {
+            event.preventDefault();
+        }
+    }
+
+</script>

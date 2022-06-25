@@ -1,0 +1,58 @@
+<%- include("../../partials/head", { titulo: 'Edit Article' }) %>
+    
+    <%- include("../../partials/header") %>
+
+    <main class="container">
+        <div class="card-header">
+            <h1>Edição de Artigos</h1>
+        </div>
+        <form class="card-body fcadastrarA" action="/articles/update" method="post">
+            <input type="hidden" name="id" value="<%= article.id %>">
+
+            <input type="text" name="title" class="form-control" value="<%= article.title %>" placeholder="<%= article.title %>" required>
+
+            <textarea id="article" placeholder="Escreva seu artigo aqui" name="body">
+                <%- article.body %>
+            </textarea>
+
+            <label for="categorias">Categoria</label>
+            <select id="categorias" name="category" class="form-control" required>
+                <% for (category of categories) {%>
+
+                    <% if (category.id == article.CategoryId) { %>
+                        <option value="<%= category.id %>" selected><%= category.title%></option>
+
+                    <% } else { %>
+                        <option value="<%= category.id %>"><%= category.title %></option>
+                    <% } %>
+
+                <% } %>
+            </select>
+            <button type="submit" class="btn btn-warning">Editar</button>
+        </form>
+    </main>
+    
+<%- include("../../partials/footer") %>
+<script src="/tinymce/tinymce.min.js"></script>
+
+<script>
+    tinymce.init({
+        selector: '#article',
+        language: 'pt_BR',
+        plugins: [
+            'advlist',
+            'autolink',
+            'link',
+            'image',
+            'lists',
+            'preview',
+            'searchreplace',
+            'wordcount',
+            'fullscreen',
+            'media',
+            'save',
+            'table',
+            'emoticons'
+        ]
+    });
+</script>
